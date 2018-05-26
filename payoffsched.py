@@ -23,7 +23,7 @@ for line in sys.stdin:
 
 # Sort
 sorted_arr = sorted(input, key=lambda interval: interval[0])
-print (sorted_arr)
+#print (sorted_arr)
 
 table = [0] * len (sorted_arr)
 previous = [0] * len (sorted_arr)
@@ -33,12 +33,14 @@ previous [len (sorted_arr)-1] = binary_search (sorted_arr, sorted_arr [len (sort
 #print (previous[len (sorted_arr)-1])
 for i in range (len (sorted_arr)-2, -1, -1):
     index = binary_search (sorted_arr, sorted_arr [i][1])
-    table [i] = sorted_arr[i][2] + sorted_arr[index][2]
+    table [i] = sorted_arr[i][2]
+    if index < len (sorted_arr):
+        table[i]+=table[index]
     previous [i] = index
     if table[i] < table [i+1]:
         table [i] = table [i+1]
         previous [i] = -1 * (i+1)
-print ("Maximum Payoff: " + str(table[i]))
+print ("Maximum Payoff: " + str(table[0]))
 
 point = 0
 while (point != len (sorted_arr)):
